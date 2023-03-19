@@ -1,12 +1,3 @@
 [build]
-  command = "expo build:web --no-pwa --no-dev --no-cleartmp"
-  publish = "web-build"
-  functions = "functions"
-  # Exclude files that don't need to be in the build
-  ignore = [
-    "node_modules/**",
-    ".git/**",
-    "android/**",
-    "ios/**",
-    "web-build/**"
-  ]
+  command = "npx expo export:web"
+  publish = "build"
