@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>"yo, why is it not rebuilding?"</Text>
+      <Text>Hello from React Native!!!</Text>
       <StatusBar style="auto" />
     </View>
   );
