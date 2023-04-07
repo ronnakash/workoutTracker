@@ -7,7 +7,7 @@ const GET_WORKOUTS = gql`
     Workouts {
       _id
       title
-      authorId
+    #   authorId
       exercises {
         exercise {
           _id
@@ -25,38 +25,41 @@ const GET_WORKOUTS = gql`
 `;
 
 // Define typescript interfaces for the workout, workoutExercise, exercise, and sets types
-interface Set {
-  setNumber: number;
-  reps: number;
-  rpe: number;
-  weight: number;
+export interface Set {
+    setNumber: number;
+    reps: number;
+    rpe: number;
+    weight: number;
 }
 
-interface Exercise {
-  _id: string;
-  name: string;
+export interface Exercise {
+    _id: string;
+    name: string;
 }
 
-interface WorkoutExercise {
-  exercise: Exercise;
-  sets: Set[];
+export interface WorkoutExercise {
+    exercise: Exercise;
+    sets: Set[];
 }
 
-interface Workout {
-  _id: string;
-  title: string;
-  authorId: string;
-  exercises: WorkoutExercise[];
+export interface Workout {
+    _id: string;
+    title: string;
+    authorId: string;
+    exercises: WorkoutExercise[];
 }
 
 // Create a new ApolloClient instance
 const client = new ApolloClient({
-  uri: 'http://localhost:5000/graphql',
-  cache: new InMemoryCache(),
+    uri: 'http://localhost:5000/graphql',
+    cache: new InMemoryCache(),
 });
 
 // Define a function to make the GraphQL query
 export const getWorkouts = async (): Promise<Workout[]> => {
-  const { data } = await client.query({ query: GET_WORKOUTS });
-  return data.Workouts;
+    console.log("api call")
+    const res = await client.query({ query: GET_WORKOUTS });
+    console.log(res);
+    const { data } = res;
+    return data.Workouts;
 };
