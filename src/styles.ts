@@ -50,3 +50,48 @@ export const styles = StyleSheet.create({
       },
     
   })
+
+export const loginFormStyles = StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#fff',
+    },
+    title: {
+      fontSize: 20,
+      fontWeight: 'bold',
+      marginBottom: 20,
+    },
+    input: {
+      height: 40,
+      width: '80%',
+      borderColor: 'gray',
+      borderWidth: 1,
+      marginBottom: 10,
+      paddingHorizontal: 10,
+    },
+    errorText: {
+      color: 'red',
+      marginBottom: 10,
+    },
+    button: {
+      backgroundColor: 'blue',
+      paddingHorizontal: 20,
+      paddingVertical: 10,
+      borderRadius: 5,
+    },
+    buttonText: {
+      color: '#fff',
+      fontWeight: 'bold',
+    },
+    row: {
+      marginBottom: 10,
+    },
+    label: {
+      fontWeight: 'bold',
+      fontSize: 16,
+      marginBottom: 10,
+    }
+  });
+  

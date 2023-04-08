@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
-import { createExercise, getWorkouts } from './api/api';
-import { workoutStyles } from './styles';
-import { ExerciseInput, Workout } from './api/inputs';
+import { createExercise, getWorkouts } from '../api/api';
+import { workoutStyles } from '../styles';
+import { ExerciseInput, Workout } from '../api/inputs';
 
 const Workouts = () => {
   const [workouts, setWorkouts] = useState<Workout[]>([]);
