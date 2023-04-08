@@ -4,10 +4,11 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import User, { SignupFormValues } from '../interfaces/user';
 import { loginFormStyles } from '../styles';
+import { register } from '../api/api';
 
-interface RegisterFormProps {
-  register: (values: SignupFormValues) => Promise<User | undefined>;
-}
+// interface RegisterFormProps {
+//   register: (values: SignupFormValues) => Promise<User | undefined>;
+// }
 
 
 const LoginFormSchema = Yup.object().shape({
@@ -17,7 +18,7 @@ const LoginFormSchema = Yup.object().shape({
     password2: Yup.string().required('Password is required'),
 });
 
-const RegisterForm: React.FC<RegisterFormProps> = ({ register }) => {
+const RegisterForm = () => {
   const [error, setError] = useState<string | undefined>();
 
   const formik = useFormik({
@@ -69,7 +70,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ register }) => {
       />
       {formik.errors.password2 && <Text style={loginFormStyles.errorText}>{formik.errors.password2}</Text>}
       <TouchableOpacity style={loginFormStyles.button} onPress={formik.handleSubmit}>
-        <Text style={loginFormStyles.buttonText}>Login</Text>
+        <Text style={loginFormStyles.buttonText}>Register</Text>
       </TouchableOpacity>
     </View>
   );

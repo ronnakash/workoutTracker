@@ -4,10 +4,11 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import User, { SigninFormValues, SignupFormValues } from '../interfaces/user';
 import { loginFormStyles } from '../styles';
+import { login } from '../api/api';
 
-interface LoginFormProps {
-    login: (form : SigninFormValues) => Promise<User | undefined>;
-}
+// interface LoginFormProps {
+//     login: (form : SigninFormValues) => Promise<User | undefined>;
+// }
 
 const LoginFormSchema = Yup.object().shape({
   username: Yup.string().required('Username is required'),
@@ -15,7 +16,7 @@ const LoginFormSchema = Yup.object().shape({
   password: Yup.string().required('Password is required'),
 });
 
-const LoginForm: React.FC<LoginFormProps> = ({ login }) => {
+const LoginForm = () => {
   const [error, setError] = useState<string | undefined>();
 
   const formik = useFormik({
