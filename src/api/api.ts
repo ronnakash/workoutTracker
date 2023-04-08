@@ -1,13 +1,14 @@
-import { gql } from 'graphql-tag';
 import { ApolloClient, InMemoryCache } from '@apollo/client';
-import { print } from 'graphql';
 import { ExerciseInput, ExerciseOutput, Workout } from './inputs';
 import { CREATE_EXERCISE, GET_WORKOUTS } from './queries';
+import axios from 'axios';
+import { API_URL } from './requests';
 
+// Define endpoint URLs
 
 // Create a new ApolloClient instance
 const client = new ApolloClient({
-    uri: 'http://localhost:5000/graphql/',
+    uri: `${API_URL}/graphql/`,
     cache: new InMemoryCache(),
 });
 
@@ -34,3 +35,6 @@ export const createExercise = async (
 
   return res.data.createExercise;
 };
+
+
+
