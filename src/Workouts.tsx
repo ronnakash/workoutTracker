@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
-import { Workout, getWorkouts } from './api';
+import { createExercise, getWorkouts } from './api/api';
 import { workoutStyles } from './styles';
+import { ExerciseInput, Workout } from './api/inputs';
 
 const Workouts = () => {
   const [workouts, setWorkouts] = useState<Workout[]>([]);
@@ -10,7 +11,7 @@ const Workouts = () => {
     const fetchData = async () => {
       const result = await getWorkouts();
       console.log(result);
-      setWorkouts(result);
+      setWorkouts(result);      
     };
     fetchData();
   }, []);
