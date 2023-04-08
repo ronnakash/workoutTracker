@@ -20,3 +20,20 @@ export default class User implements UserData {
         this.picture = picture;
     }
 };
+
+export interface FormValues {
+    
+}
+
+export interface SigninFormValues extends FormValues {
+    username: string;
+    email: string;
+    password: string;
+}
+
+export interface SignupFormValues extends FormValues {
+    username: string;
+    email: string;
+    password1: string;
+    password2: string;
+}

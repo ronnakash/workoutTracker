@@ -1,10 +1,14 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { ExerciseInput, ExerciseOutput, Workout } from './inputs';
 import { CREATE_EXERCISE, GET_WORKOUTS } from './queries';
-import axios from 'axios';
-import { API_URL } from './requests';
+import axios, { AxiosResponse } from 'axios';
+import { API_URL, loginUserRequest, registerUserRequest } from './requests';
+import User, { SigninFormValues, SignupFormValues } from '../interfaces/user';
 
-// Define endpoint URLs
+const getHeader = async (user : User | undefined) => {
+  let token = user? user.token : null;
+  return token? {Authorization: token} : {Authorization: "Bearer"};
+};
 
 // Create a new ApolloClient instance
 const client = new ApolloClient({
@@ -37,4 +41,30 @@ export const createExercise = async (
 };
 
 
+export const register = async (form : SignupFormValues) : Promise<User | undefined> => {
+  let user;
+  let headers = await getHeader(user);
+  const registerForm : SigninFormValues = {
+      username: form.username,
+      email: form.email,
+      password: form.password1
+  };
+  await registerUserRequest
+      .put('', registerForm, {headers: headers})
+      .then((response : AxiosResponse)=> {
+          user = response.data;
+      })
+      // .catch(error => displayError(error))
+  return user;
+};
 
+export const login = async (form : SigninFormValues) : Promise<User | undefined> => {
+  let user;
+  await loginUserRequest
+      .post('', form)
+      .then((response : AxiosResponse)=> {
+          user = response.data;
+      })
+      // .catch(error => displayError(error))
+  return user;
+};
