@@ -48,7 +48,19 @@ export const styles = StyleSheet.create({
       setText: {
         marginRight: 10,
       },
-    
+      newWorkoutButtonText: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: 'white',
+      },
+      newWorkoutButton: {
+        backgroundColor: 'blue',
+        padding: 10,
+        borderRadius: 5,
+        marginTop: 20,
+        alignSelf: 'center',
+      },
+      
   })
 
 export const loginFormStyles = StyleSheet.create({
