@@ -188,6 +188,11 @@ export const loginFormStyles = StyleSheet.create({
     fontWeight: 'bold',
     marginRight: 10,
     },
+    setLabelSmall: {
+      fontWeight: '600',
+      textAlign: 'center',
+      margin: 10,
+    },
     exerciseButtonText: {
       color: 'blue',
       fontSize: 16,
@@ -205,6 +210,8 @@ export const loginFormStyles = StyleSheet.create({
       padding: 5,
       borderRadius: 5,
       marginTop: 20,
+      textAlign: 'center',
+
     },
     setContainer: {
       backgroundColor: '#F5F5F5',
@@ -223,5 +230,6 @@ export const loginFormStyles = StyleSheet.create({
       padding: 5,
       borderRadius: 5,
       marginLeft: 5,
+      textAlign: 'center',
     },
     });    

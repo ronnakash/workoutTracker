@@ -25,7 +25,7 @@ export const NewWorkoutForm = ({ onSubmit }: Props) => {
 
   const handleAddSet = (exerciseIndex: number) => {
 
-    const newSet: Set = { setNumber: 0, reps: 0, rpe: 0, weight: 0 };
+    const newSet: Set = { setNumber: exercises[exerciseIndex].sets.length+1, reps: 0, rpe: 0, weight: 0 };
     const newExercises = [...exercises];
     newExercises[exerciseIndex].sets.push(newSet);
     setExercises(newExercises);
@@ -68,8 +68,9 @@ export const NewWorkoutForm = ({ onSubmit }: Props) => {
                   <Text style={workoutFormStyles.setLabel}>Set {set.setNumber}</Text>
                 </View>
                 <View style={workoutFormStyles.setColumn}>
+                  <Text style={workoutFormStyles.setLabelSmall}>Reps</Text>
                   <TextInput
-                    placeholder="Reps"
+                    // placeholder="Reps"
                     keyboardType="numeric"
                     value={set.reps.toString()}
                     onChangeText={(text) => {
@@ -81,26 +82,28 @@ export const NewWorkoutForm = ({ onSubmit }: Props) => {
                   />
                 </View>
                 <View style={workoutFormStyles.setColumn}>
+                <Text style={workoutFormStyles.setLabelSmall}>Weight</Text>
                   <TextInput
-                    placeholder="RPE"
+                    // placeholder="Weight"
                     keyboardType="numeric"
-                    value={set.rpe.toString()}
+                    value={set.weight.toString()}
                     onChangeText={(text) => {
                       const newExercises = [...exercises];
-                      newExercises[exerciseIndex].sets[setIndex].rpe = parseInt(text);
+                      newExercises[exerciseIndex].sets[setIndex].weight = parseInt(text);
                       setExercises(newExercises);
                     }}
                     style={workoutFormStyles.setInput}
                   />
                 </View>
                 <View style={workoutFormStyles.setColumn}>
+                <Text style={workoutFormStyles.setLabelSmall}>RPE</Text>
                   <TextInput
-                    placeholder="Weight"
+                    // placeholder="RPE"
                     keyboardType="numeric"
-                    value={set.weight.toString()}
+                    value={set.rpe.toString()}
                     onChangeText={(text) => {
                       const newExercises = [...exercises];
-                      newExercises[exerciseIndex].sets[setIndex].weight = parseInt(text);
+                      newExercises[exerciseIndex].sets[setIndex].rpe = parseInt(text);
                       setExercises(newExercises);
                     }}
                     style={workoutFormStyles.setInput}
