@@ -107,3 +107,121 @@ export const loginFormStyles = StyleSheet.create({
     }
   });
   
+  export const workoutFormStyles = StyleSheet.create({
+    container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#fff',
+    },
+    label: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 5,
+    },
+    input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 10,
+    },
+    button: {
+    backgroundColor: 'blue',
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 20,
+    alignSelf: 'center',
+    },
+    buttonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 18,
+    },
+    submitButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 18,
+    textAlign: 'center',
+    },
+    submitButton: {
+    backgroundColor: 'blue',
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 20,
+    },
+    setColumn: {
+    flex: 1,
+    flexDirection: 'column',
+    marginVertical: 10,
+    backgroundColor: '#f5f5f5',
+    borderRadius: 5,
+    padding: 10,
+    },
+    setInput: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+    padding: 5,
+    marginBottom: 5,
+    backgroundColor: '#fff',
+    },
+    setGrid: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    },
+    exerciseInput: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 10,
+    backgroundColor: '#f5f5f5',
+    },
+    exerciseHeader: {
+    backgroundColor: '#e0e0e0',
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 10,
+    },
+    setLabel: {
+    fontWeight: 'bold',
+    marginRight: 10,
+    },
+    exerciseButtonText: {
+      color: 'blue',
+      fontSize: 16,
+      fontWeight: 'bold',
+    },
+    setButtonText: {
+      color: 'blue',
+      fontSize: 14,
+      fontWeight: 'bold',
+    },
+    exerciseButton: {
+      backgroundColor: 'white',
+      borderWidth: 1,
+      borderColor: 'blue',
+      padding: 5,
+      borderRadius: 5,
+      marginTop: 20,
+    },
+    setContainer: {
+      backgroundColor: '#F5F5F5',
+      padding: 10,
+      borderRadius: 5,
+      marginBottom: 10,
+    },
+    exerciseContainer: {
+      backgroundColor: '#EEEEEE',
+      padding: 20,
+      borderRadius: 5,
+      marginBottom: 10,
+    },
+    setButton: {
+      backgroundColor: 'grey',
+      padding: 5,
+      borderRadius: 5,
+      marginLeft: 5,
+    },
+    });    

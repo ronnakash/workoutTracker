@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button } from 'react-native';
+import { View, Text, TextInput, Button, Pressable } from 'react-native';
 import { Workout, Set, WorkoutExercise, Exercise} from '../api/inputs';
+import { workoutFormStyles } from '../styles';
 
 interface Props {
   onSubmit: (workout: Workout) => void;
@@ -43,64 +44,96 @@ export const NewWorkoutForm = ({ onSubmit }: Props) => {
 
   return (
     <View>
-      <TextInput placeholder="Title" value={title} onChangeText={setTitle} />
-      <TextInput placeholder="Author ID" value={authorId} onChangeText={setAuthorId} />
-      <Text>Exercises:</Text>
       {exercises.map((exercise, exerciseIndex) => (
-        <View key={exerciseIndex}>
-          <TextInput
-            placeholder="Exercise name"
-            value={exercise.exercise.name}
-            onChangeText={(text) => {
-              const newExercises = [...exercises];
-              newExercises[exerciseIndex].exercise.name = text;
-              setExercises(newExercises);
-            }}
-          />
-          {exercise.sets.map((set : Set, setIndex : number) => (
-            <View key={setIndex}>
-              <Text>Set {set.setNumber}</Text>
-              <TextInput
-                placeholder="Reps"
-                keyboardType="numeric"
-                value={set.reps.toString()}
-                onChangeText={(text) => {
-                  const newExercises = [...exercises];
-                  newExercises[exerciseIndex].sets[setIndex].reps = parseInt(text);
-                  setExercises(newExercises);
-                }}
-              />
-              <TextInput
-                placeholder="RPE"
-                keyboardType="numeric"
-                value={set.rpe.toString()}
-                onChangeText={(text) => {
-                  const newExercises = [...exercises];
-                  newExercises[exerciseIndex].sets[setIndex].rpe = parseInt(text);
-                  setExercises(newExercises);
-                }}
-              />
-              <TextInput
-                placeholder="Weight"
-                keyboardType="numeric"
-                value={set.weight.toString()}
-                onChangeText={(text) => {
-                  const newExercises = [...exercises];
-                  newExercises[exerciseIndex].sets[setIndex].weight = parseInt(text);
-                  setExercises(newExercises);
-                }}
-                />
-                <Button title="Remove Set" onPress={() => handleRemoveSet(exerciseIndex, setIndex)} />
-              </View>
-            ))}
-            <Button title="Add Set" onPress={() => handleAddSet(exerciseIndex)} />
-            <Button title="Remove Exercise" onPress={() => handleRemoveExercise(exerciseIndex)} />
+        <View key={exerciseIndex} style={workoutFormStyles.exerciseContainer}>
+          <View style={workoutFormStyles.exerciseHeader}>
+            <TextInput
+              placeholder="Exercise name"
+              value={exercise.exercise.name}
+              onChangeText={(text) => {
+                const newExercises = [...exercises];
+                newExercises[exerciseIndex].exercise.name = text;
+                setExercises(newExercises);
+              }}
+              style={workoutFormStyles.exerciseInput}
+            />
+            <Pressable onPress={() => handleRemoveExercise(exerciseIndex)} style={workoutFormStyles.exerciseButton}>
+              <Text style={workoutFormStyles.exerciseButtonText}>-</Text>
+            </Pressable>
           </View>
-        ))}
-        <Button title="Add Exercise" onPress={handleAddExercise} />
-        <Button title="Submit" onPress={handleSubmit} />
-      </View>
-    );
+          {exercise.sets.map((set : Set, setIndex : number) => (
+            <View key={setIndex} style={workoutFormStyles.setContainer}>
+              <View style={workoutFormStyles.setGrid}>
+                <View style={workoutFormStyles.setColumn}>
+                  <Text style={workoutFormStyles.setLabel}>Set {set.setNumber}</Text>
+                </View>
+                <View style={workoutFormStyles.setColumn}>
+                  <TextInput
+                    placeholder="Reps"
+                    keyboardType="numeric"
+                    value={set.reps.toString()}
+                    onChangeText={(text) => {
+                      const newExercises = [...exercises];
+                      newExercises[exerciseIndex].sets[setIndex].reps = parseInt(text);
+                      setExercises(newExercises);
+                    }}
+                    style={workoutFormStyles.setInput}
+                  />
+                </View>
+                <View style={workoutFormStyles.setColumn}>
+                  <TextInput
+                    placeholder="RPE"
+                    keyboardType="numeric"
+                    value={set.rpe.toString()}
+                    onChangeText={(text) => {
+                      const newExercises = [...exercises];
+                      newExercises[exerciseIndex].sets[setIndex].rpe = parseInt(text);
+                      setExercises(newExercises);
+                    }}
+                    style={workoutFormStyles.setInput}
+                  />
+                </View>
+                <View style={workoutFormStyles.setColumn}>
+                  <TextInput
+                    placeholder="Weight"
+                    keyboardType="numeric"
+                    value={set.weight.toString()}
+                    onChangeText={(text) => {
+                      const newExercises = [...exercises];
+                      newExercises[exerciseIndex].sets[setIndex].weight = parseInt(text);
+                      setExercises(newExercises);
+                    }}
+                    style={workoutFormStyles.setInput}
+                  />
+                </View>
+                <View style={workoutFormStyles.setColumn}>
+                  <Pressable onPress={() => handleRemoveSet(exerciseIndex, setIndex)} style={workoutFormStyles.setButton}>
+                    <Text style={workoutFormStyles.setButtonText}>-</Text>
+                  </Pressable>
+                </View>
+              </View>
+            </View>
+          ))}
+          <Pressable onPress={() => handleAddSet(exerciseIndex)} style={workoutFormStyles.setButton}>
+            <Text style={workoutFormStyles.setButtonText}>Add Set</Text>
+          </Pressable>
+        </View>
+      ))}
+      <Pressable onPress={handleAddExercise} style={workoutFormStyles.exerciseButton}>
+        <Text style={workoutFormStyles.exerciseButtonText}>Add Exercise</Text>
+      </Pressable>
+      <Pressable onPress={handleSubmit} style={workoutFormStyles.submitButton}>
+        <Text style={workoutFormStyles.submitButtonText}>Submit</Text>
+      </Pressable>
+    </View>
+  );
+  
+  
+  
+  
+  
+  
+  
 };
 
 export default NewWorkoutForm;
