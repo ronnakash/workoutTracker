@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, Button, Pressable } from 'react-native';
+import { View, Text, TextInput, Button, Pressable, ScrollView } from 'react-native';
 import { Workout, Set, WorkoutExercise, Exercise} from '../api/inputs';
 import { workoutFormStyles } from '../styles';
 import { getAllExercises } from '../api/api';
@@ -53,31 +53,16 @@ export const NewWorkoutForm = ({ onSubmit }: Props) => {
   };
 
   return (
-    <View>
+    <ScrollView>
       <TextInput
-      style={workoutFormStyles.workoutTitleInput} 
+      style={[workoutFormStyles.setInput, workoutFormStyles.workoutTitleInput]} 
         placeholder="Workout Title"
         value={title}
-        onChangeText={(text) => {
-          setTitle(text);
-        }}
-        style={workoutFormStyles.setInput}
+        onChangeText={ (text) => { setTitle(text); }}
       />
       {exercises.map((exercise, exerciseIndex) => (
-      
         <View key={exerciseIndex} style={workoutFormStyles.exerciseContainer}>
           <View style={workoutFormStyles.exerciseHeader}>
-            {/* <TextInput
-              placeholder="Exercise name"
-              value={exercise.exercise.name}
-              onChangeText={(text) => {
-                const newExercises = [...exercises];
-                newExercises[exerciseIndex].exercise.name = text;
-                setExercises(newExercises);
-              }}
-              style={workoutFormStyles.exerciseInput}
-            /> */}
-            {exercises.map((exercise, exerciseIndex) => (
                 <View key={exerciseIndex} style={workoutFormStyles.exerciseContainer}>
                     <View style={workoutFormStyles.exerciseHeader}>
                         <Picker
@@ -101,11 +86,6 @@ export const NewWorkoutForm = ({ onSubmit }: Props) => {
                         </Pressable>
                     </View>
                 </View>
-                ))}
-
-            <Pressable onPress={() => handleRemoveExercise(exerciseIndex)} style={workoutFormStyles.exerciseButton}>
-              <Text style={workoutFormStyles.exerciseButtonText}>-</Text>
-            </Pressable>
           </View>
           {exercise.sets.map((set : Set, setIndex : number) => (
             <View key={setIndex} style={workoutFormStyles.setContainer}>
@@ -116,7 +96,7 @@ export const NewWorkoutForm = ({ onSubmit }: Props) => {
                 <View style={workoutFormStyles.setColumn}>
                   <Text style={workoutFormStyles.setLabelSmall}>Reps</Text>
                   <TextInput
-                    // placeholder="Reps"
+                    placeholder="0"
                     keyboardType="numeric"
                     value={set.reps.toString()}
                     onChangeText={(text) => {
@@ -130,7 +110,7 @@ export const NewWorkoutForm = ({ onSubmit }: Props) => {
                 <View style={workoutFormStyles.setColumn}>
                 <Text style={workoutFormStyles.setLabelSmall}>Weight</Text>
                   <TextInput
-                    // placeholder="Weight"
+                    placeholder="0"
                     keyboardType="numeric"
                     value={set.weight.toString()}
                     onChangeText={(text) => {
@@ -144,7 +124,8 @@ export const NewWorkoutForm = ({ onSubmit }: Props) => {
                 <View style={workoutFormStyles.setColumn}>
                 <Text style={workoutFormStyles.setLabelSmall}>RPE</Text>
                   <TextInput
-                    // placeholder="RPE"
+                    placeholder="0"
+                    defaultValue=""
                     keyboardType="numeric"
                     value={set.rpe.toString()}
                     onChangeText={(text) => {
@@ -174,7 +155,7 @@ export const NewWorkoutForm = ({ onSubmit }: Props) => {
       <Pressable onPress={handleSubmit} style={workoutFormStyles.submitButton}>
         <Text style={workoutFormStyles.submitButtonText}>Submit</Text>
       </Pressable>
-    </View>
+    </ScrollView>
   );
   
 };
