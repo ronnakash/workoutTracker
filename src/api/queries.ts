@@ -35,3 +35,19 @@ export const CREATE_EXERCISE = gql`
     }
   }
 `;
+
+
+export const GET_EXERCISES = 
+  gql`
+    query {
+      Exercises{
+        _id
+        name
+        workload
+        musclesWorked {
+          workload
+          muscle
+        }
+      }
+    }
+  `

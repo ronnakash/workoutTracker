@@ -1,6 +1,6 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
-import { ExerciseInput, ExerciseOutput, Workout } from './inputs';
-import { CREATE_EXERCISE, GET_WORKOUTS } from './queries';
+import { Exercise, ExerciseInput, ExerciseOutput, Workout } from './inputs';
+import { CREATE_EXERCISE, GET_EXERCISES, GET_WORKOUTS } from './queries';
 import axios, { AxiosResponse } from 'axios';
 import { API_URL, loginUserRequest, registerUserRequest } from './requests';
 import User, { SigninFormValues, SignupFormValues } from '../interfaces/user';
@@ -18,11 +18,12 @@ const client = new ApolloClient({
 
 // Define a function to make the GraphQL query
 export const getWorkouts = async (): Promise<Workout[]> => {
-    console.log("api call")
-    const res = await client.query({ query: GET_WORKOUTS });
-    console.log(res);
-    const { data } = res;
-    return data.Workouts;
+    // console.log("api call")
+    // const res = await client.query({ query: GET_WORKOUTS });
+    // console.log(res);
+    // const { data } = res;
+    // return data.Workouts;
+    return [];
 };
 
 // Define a function to create a new exercise
@@ -67,4 +68,17 @@ export const login = async (form : SigninFormValues) : Promise<User | undefined>
       })
       // .catch(error => displayError(error))
   return user;
+};
+
+
+export const getAllExercises = async () =>  {
+  try {
+    console.log("exercises");
+    const response = await client.query({ query: GET_EXERCISES })
+    console.log(response);
+    console.log(response.data.Exercises as Exercise[]);
+    return response.data.Exercises as Exercise[];
+  } catch (error) {
+    console.error(error);
+  }
 };

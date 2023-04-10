@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, Button, Pressable } from 'react-native';
 import { Workout, Set, WorkoutExercise, Exercise} from '../api/inputs';
 import { workoutFormStyles } from '../styles';
+import { getAllExercises } from '../api/api';
+import { Picker } from '@react-native-picker/picker';
 
 interface Props {
   onSubmit: (workout: Workout) => void;
@@ -11,6 +13,14 @@ export const NewWorkoutForm = ({ onSubmit }: Props) => {
   const [title, setTitle] = useState('');
   const [authorId, setAuthorId] = useState('');
   const [exercises, setExercises] = useState<WorkoutExercise[]>([]);
+  const [exerciseList, setExerciseList] = useState<Exercise[]>([]);
+
+  useEffect(() => {
+    getAllExercises().then((exercises) => {
+      setExerciseList(exercises);
+    });
+  }, []);
+  
 
   const handleAddExercise = () => {
     const newExercise: WorkoutExercise = { exercise: { _id: '', name: '' }, sets: [] };
@@ -47,7 +57,7 @@ export const NewWorkoutForm = ({ onSubmit }: Props) => {
       {exercises.map((exercise, exerciseIndex) => (
         <View key={exerciseIndex} style={workoutFormStyles.exerciseContainer}>
           <View style={workoutFormStyles.exerciseHeader}>
-            <TextInput
+            {/* <TextInput
               placeholder="Exercise name"
               value={exercise.exercise.name}
               onChangeText={(text) => {
@@ -56,7 +66,33 @@ export const NewWorkoutForm = ({ onSubmit }: Props) => {
                 setExercises(newExercises);
               }}
               style={workoutFormStyles.exerciseInput}
-            />
+            /> */}
+            {exercises.map((exercise, exerciseIndex) => (
+                <View key={exerciseIndex} style={workoutFormStyles.exerciseContainer}>
+                    <View style={workoutFormStyles.exerciseHeader}>
+                        <Picker
+                            selectedValue={exercise.exercise._id}
+                            onValueChange={(value: string) => {
+                            const newExercises = [...exercises];
+                            const selectedExercise = exerciseList.find((exercise) => exercise._id === value);
+                            if (selectedExercise) {
+                                newExercises[exerciseIndex].exercise = { ...selectedExercise };
+                                setExercises(newExercises);
+                            }
+                            }}
+                            style={workoutFormStyles.exerciseInput}
+                        >
+                            {exerciseList.map((exercise) => (
+                            <Picker.Item key={exercise._id} label={exercise.name} value={exercise._id} />
+                            ))}
+                        </Picker>
+                        <Pressable onPress={() => handleRemoveExercise(exerciseIndex)} style={workoutFormStyles.exerciseButton}>
+                            <Text style={workoutFormStyles.exerciseButtonText}>-</Text>
+                        </Pressable>
+                    </View>
+                </View>
+                ))}
+
             <Pressable onPress={() => handleRemoveExercise(exerciseIndex)} style={workoutFormStyles.exerciseButton}>
               <Text style={workoutFormStyles.exerciseButtonText}>-</Text>
             </Pressable>
@@ -130,12 +166,6 @@ export const NewWorkoutForm = ({ onSubmit }: Props) => {
       </Pressable>
     </View>
   );
-  
-  
-  
-  
-  
-  
   
 };
 
