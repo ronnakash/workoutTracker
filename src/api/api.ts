@@ -81,4 +81,5 @@ export const getAllExercises = async () =>  {
   } catch (error) {
     console.error(error);
   }
+  return [] 
 };

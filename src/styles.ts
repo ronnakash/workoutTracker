@@ -112,6 +112,7 @@ export const loginFormStyles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: '#fff',
+    minWidth: 500,
     },
     label: {
     fontSize: 16,
@@ -232,4 +233,7 @@ export const loginFormStyles = StyleSheet.create({
       marginLeft: 5,
       textAlign: 'center',
     },
+    workoutTitleInput: {
+      marginTop: 10,
+    }
     });    

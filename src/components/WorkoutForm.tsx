@@ -54,7 +54,17 @@ export const NewWorkoutForm = ({ onSubmit }: Props) => {
 
   return (
     <View>
+      <TextInput
+      style={workoutFormStyles.workoutTitleInput} 
+        placeholder="Workout Title"
+        value={title}
+        onChangeText={(text) => {
+          setTitle(text);
+        }}
+        style={workoutFormStyles.setInput}
+      />
       {exercises.map((exercise, exerciseIndex) => (
+      
         <View key={exerciseIndex} style={workoutFormStyles.exerciseContainer}>
           <View style={workoutFormStyles.exerciseHeader}>
             {/* <TextInput
